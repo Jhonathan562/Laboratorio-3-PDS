@@ -5,7 +5,7 @@ from sklearn.decomposition import FastICA
 
 # Ruta de los audios
 ruta_audios = "audios/"
-output_dir = "C:/Users/DELL/Desktop/universidad/python/Señales/lab3/audios_mejorados/"
+output_dir = "C:/Users/DELL/Desktop/universidad/python/Señales/laboratorio-3-PDS/audios_mejorados/"
 
 # Cargar audios
 time_Jhonathan, audio_Jhonathan = wav.read(ruta_audios + "audio_Jhonathan.wav")
@@ -28,14 +28,14 @@ plt.figure(figsize=(12,6))
 plt.subplot(2, 1, 1)
 plt.plot(tiempo_Jhonathan, Jhonathan, color="blue")
 plt.xlabel("Tiempo (s)")
-plt.ylabel("Decibeles (db)")
+plt.ylabel("Amplitud normalizada (db)")
 plt.title("Audio Jhonathan")
 plt.legend()
 
 plt.subplot(2, 1, 2)
 plt.plot(tiempo_Jose, Jose, color="red")
 plt.xlabel("Tiempo (s)")
-plt.ylabel("Decibeles (db)")
+plt.ylabel("Amplitud normalizada (db)")
 plt.title("Audio Jose")
 plt.legend()
 
