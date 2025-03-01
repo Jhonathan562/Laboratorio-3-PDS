@@ -5,7 +5,8 @@ En primer lugar debemos comprender que los audios grabados no son de muy buena c
 
 Ahora bien para ello debemos tener en cuenta que paea ka separacion de audios, comprendemos que existe un ruido en el ambiente o en el medio, bien sea el aire, gritos, que otra persona grito, etc esto hace que debamos averiguar cual es la relacion entre el ruido del ambiente y el audio, esto se calculara con el SNR dicho bien este SNR se dara mediante la siguiente funcion calcular el snr mediante el audio de entrada.
 
-Esta funcion se llamara "calculate_snr" en donde en dicha funcion entra un audio bien sea el de Jose o el de Jhonathan, para ello primero deberemos calcular el poder de audio esto se dara medianto la funcion np.mean del audio original al cuadrado, ya luego la 
+Esta funcion se llamara "calculate_snr" en donde en dicha funcion entra un audio bien sea el de Jose o el de Jhonathan, para ello primero deberemos calcular el poder de audio esto se dara medianto la funcion np.mean del audio original al cuadrado, ya luego el ruido de poder sera mediante el audio menos literal el audio de poder, ahora ya con esto tendremos el ruido mediante la señal original dicha señal se dara y se restara, por ultimo el SNR sera igual a 10 por el logaritmo en base 10 de la division entre el audio de poder entre el ruidpo y por ultimo retornara el ruido generado:
+
 
         def calculate_snr(audio):
             audio_power = np.mean(audio ** 2)
@@ -13,11 +14,24 @@ Esta funcion se llamara "calculate_snr" en donde en dicha funcion entra un audio
             snr = 10 * np.log10(audio_power / noise_power)
             return snr
 
+Ahora bien vamos a llamar a la funcion y con ello enviaremos los datos con el fin de solucionar dicho inconveniente ahora bien, enviamos los audios hacia la funcion:
+
         snr_jhonathan = calculate_snr(Jhonathan)
         snr_jose = calculate_snr(Jose)
 
+Luego de ello imprimimos el valor dicho valor fue:
+
         print(f"SNR de Jhonathan: {snr_jhonathan:.2f} dB")
         print(f"SNR de José: {snr_jose:.2f} dB")
+
+SNR de Jhonathan: -15.44 dB
+SNR de José: -7.93 dB
+
+Dicho resultado indica que el ruido del entorno es mayor a comparacion del audio original y la señal original, con ello entre mas negativo es menos se entienete e indica que la poblacion no estuvo muy bien advertida con este tipo de cosas.
+
+Ya sabiendo que el SNR es menor e indica una gran complicacion, pero es totalmente normal porque el ruido del entorno sera mas fuerte que el de los audio originales, entre mas negativo mas normal sera el audio porque rara vez supera a el ruido ambiente
+
+
 
         t = np.linspace(0, 1, fs, endpoint=False)  # Vector de tiempo
         N = len(t)
