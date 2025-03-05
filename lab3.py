@@ -28,14 +28,14 @@ plt.figure(figsize=(12,6))
 plt.subplot(2, 1, 1)
 plt.plot(tiempo_Jhonathan, Jhonathan, color="blue")
 plt.xlabel("Tiempo (s)")
-plt.ylabel("Amplitud normalizada (db)")
+plt.ylabel("Amplitud normalizada ")
 plt.title("Audio Jhonathan")
 plt.legend()
 
 plt.subplot(2, 1, 2)
 plt.plot(tiempo_Jose, Jose, color="red")
 plt.xlabel("Tiempo (s)")
-plt.ylabel("Amplitud normalizada (db)")
+plt.ylabel("Amplitud normalizada ")
 plt.title("Audio Jose")
 plt.legend()
 
@@ -88,7 +88,7 @@ nuevo_audio_Jose = audio_Jose[:minutos]
 audios_mixtos = np.column_stack((nuevo_audio_Jhonathan, nuevo_audio_Jose))
 ica = FastICA(n_components=2)
 audios_separados = ica.fit_transform(audios_mixtos)
-audios_separados = np.int16(audios_separados / np.max(np.abs(audios_separados)) * 32767)
+audios_separados = np.int16(audios_separados / np.max(np.abs(audios_separados)) * 62767)
 
 wav.write(output_dir + "Audio_ICA_Jhonathan.wav", fs, audios_separados[:, 0])
 wav.write(output_dir + "Audio_ICA_Jose.wav", fs, audios_separados[:, 1])
@@ -108,12 +108,12 @@ def delay_and_sum(audio_signals, delays):
     return np.mean(delayed_signals, axis=0)
 
 # Simulación de retardos para Beamforming (en muestras)
-delays = [0, 5]  # Ajusta según la posición de los micrófonos
+delays = [0, 18]  # Ajusta según la posición de los micrófonos
 beamformed_Jhonathan = delay_and_sum([audio_Jhonathan, audio_Jose], delays)
 beamformed_Jose = delay_and_sum([audio_Jose, audio_Jhonathan], delays)
 
-beamformed_Jhonathan = np.int16(beamformed_Jhonathan / np.max(np.abs(beamformed_Jhonathan)) * 32767)
-beamformed_Jose = np.int16(beamformed_Jose / np.max(np.abs(beamformed_Jose)) * 32767)
+beamformed_Jhonathan = np.int16(beamformed_Jhonathan / np.max(np.abs(beamformed_Jhonathan)) * 62767)
+beamformed_Jose = np.int16(beamformed_Jose / np.max(np.abs(beamformed_Jose)) * 62767)
 
 # Guardar los audios procesados con Beamforming
 wav.write(output_dir + "Audio_Beamforming_Jhonathan.wav", fs, beamformed_Jhonathan)
