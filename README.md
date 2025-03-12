@@ -1,4 +1,36 @@
 # Laboratorio 3 Señales
+Este informe tiene como objetivo aplicar el análisis en frecuencia de señales de voz en un problema de captura
+de señales mezcladas.
+
+Para esto necesitamos entender una serie de terminos para la comprensión de las graficas presentadas y el codigo.
+
+## Terminos a tener en cuenta
+
+### Espectro del sonido 
+El espectro del sonido se refiere a la distribución de la energía sonora en función de la frecuencia. Es decir, una representación gráfica que muestra la intensidad del sonido en diferentes frecuencias.
+Además el espectro del sonido es una función que describe la distribución de la energía sonora en función de la frecuencia, usualmente medida en hercios (Hz).
+
+El espectro del sonido se puede analizar utilizando la transformada de Fourier discreta. La TFD se utiliza para obtener el espectro del sonido en el dominio de la frecuencia.
+
+    X[k] = ∑[n=0 a N-1] x[n] * e^{-j2πkn/N}
+
+- X[k] es el espectro del sonido en la frecuencia k
+- x[n] es la señal de audio en el tiempo n
+- N es el número de muestras de la señal de audio
+- k es la frecuencia (de 0 a N-1)
+- j es la unidad imaginaria
+
+### Decibeles 
+Un decibelio (dB) es una unidad de medida logarítmica que se utiliza para expresar la relación entre la amplitud de una señal y una referencia. La relación se expresa en términos de la razón entre la potencia de la señal y la potencia de referencia, se define como.
+
+    dB = 10 * log10(P/P0)
+
+- P es la potencia de la señal
+- P0 es la potencia de referencia
+
+Los decibelios se utilizan para medir la intensidad de la señal en relación con una referencia. Esto es útil para comparar la intensidad de diferentes señales, además tambien se utilizan para analizar la relación entre la señal deseada y el ruido presente en la señal. Esto es útil para evaluar la calidad de la señal.
+
+
 
 ## Librerias y audios
 En primer lugar se importaron las librerias scipy para leer y guardar los audios .wv, en segundo lugar se importo la funcion matematica como libreria numpy, luego la funcion que nos permite graficar todo como matplotlib y por ultimo la descomposicion del audio mejor conocido como ICA
@@ -64,7 +96,10 @@ Por ultimo se van a grtaficar ambas señales esto con una amplitud normalizada e
 
 ![TRANFORMADA DE FOURIER SEÑALES](Images/Audio_Image.png)
 
-Como se puede ver una magnitud como amplitud del audio esto en Y, y en X se dara su tiempo de demora.
+Esta gráfica de nivel de audio nos  muestra la variación de la amplitud del audio en función del tiempo. Se puede ver una magnitud como amplitud del audio esto en Y, y en X se dara su tiempo de demora.  
+
+En esta grafica se puede evidenciar momentos en los que la amplitud del audio es más alta los picos pueden indicar momentos de mayor intensidad en la en la voz, momentos en los que la amplitud del audio es más baja.
+
 
 ## ESPECTRO POR MEDIO DE LA TRANSFORMADA DE FOURIER HACIA LOS AUDIOS
 En primer lugar debemos comprender que los audios grabados no son de muy buena calidad debido a que se grabaron a una distancia de 6.096 m con una incertidumbre de 0.001 m debido a que fue medido en cm y ya en su conversion a metros mantiene en cierta manera la misma incertidumbre
@@ -135,7 +170,7 @@ Ahora con ello vamos a graficar la transformada de Fourier en cuanto o en base a
         plt.show()
 
 ![TRANFORMADA DE FOURIER SEÑALES](Images/Transformation_Fourier_Image.png)
-Ahora bien aca se puede observar los audios en un dominio de la frecuencia y dado mediante los decibeles esto como su magnitud principal esto con el fin de comprender que dicha grafica recreara nuevamente la señal original esto a traves de lo analogo 
+Ahora bien aca se puede observar los audios en un dominio de la frecuencia y dado mediante los decibeles esto como su magnitud principal esto con el fin de comprender que dicha grafica recreara nuevamente la señal original esto a traves de lo analogo.
 
 ## SEPARACION DE AUDIOS METODO ICA Y BEAMFORMED
 
@@ -215,3 +250,19 @@ ICA (Análisis de Componentes Independientes) se basa en la independencia estad�
 Beamforming (Formación de haces) utiliza la información espacial de los micrófonos para mejorar la captura de una señal específica y reducir interferencias. Sin embargo, su rendimiento depende de la disposición física de los micrófonos y de la precisión en la estimación de los retardos. En nuestro caso, aunque Beamforming permitió cierta mejora en la direccionalidad del audio, no logró separar las señales con la misma eficacia que ICA.
 
 Conclusión: En este experimento, ICA mostró un mejor desempeño en la separación y mejora de los audios. Su facilidad de implementación y efectividad en la recuperación de las señales lo convierten en la opción preferida sobre Beamforming, especialmente en escenarios donde no se cuenta con un arreglo bien definido de micrófonos o cuando se busca una separación más clara de las voces.
+
+## Requisitos
+- Python 3.11
+- Wfdb
+- matplotlib
+- Grabadora de audio
+- Espacio preferiblemente libre de ruido
+
+## Bibliografia 
+- Smith, J. O. (2010). Procesamiento de señales de audio
+- Renza, D., & Ballesteros, D. M. (2020). Procesamiento digital de señales utilizando Python
+- GitHub. (2020). Deep Learning for Audio Signal Processing.
+
+## Contacto
+- Jose Daniel Porras est.jose.dporras@unimilitar.edu.co
+- Jhonathan David Guevara Ramirez est.jhonathan.guev@unimilitar.edu.co
